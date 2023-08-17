@@ -48,7 +48,7 @@ func CreateTodo(todo string) *utils.ResponseCallback {
 func UpdateTodo(ID int, value model.Todo) *utils.ResponseCallback {
 	var response *utils.ResponseCallback
 	todo, err := model.GetTodoById(ID)
-	if err != nil {
+	if err == nil {
 		todo.ID = ID
 		todo.IsComplete = value.IsComplete
 		model.UpdateTodo(todo)
@@ -73,7 +73,7 @@ func UpdateTodo(ID int, value model.Todo) *utils.ResponseCallback {
 func RemoveTodo(ID int) *utils.ResponseCallback {
 	var response *utils.ResponseCallback
 	_, err := model.GetTodoById(ID)
-	if err != nil {
+	if err == nil {
 		model.DeleteTodo(ID)
 
 		callback := &utils.ResponseCallback{
